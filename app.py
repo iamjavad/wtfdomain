@@ -10,7 +10,7 @@ from wtforms.validators import DataRequired
 app = Flask(__name__)
 
 class DmainInput(FlaskForm):
-    Domain = StringField("Domain", validators=[DataRequired()])
+    Domain = StringField("Enter Domain name:", validators=[DataRequired()])
     Submit = SubmitField("submit")
 
 app.config['SECRET_KEY'] = 'mysuper secret key'

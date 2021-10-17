@@ -3,6 +3,8 @@
 
 <h1>Welcome to Domain information</h1>
 <form method="POST">
+    <div class="form-floating mb-3"></div>
+
     {{ form.hidden_tag() }}
     {{ form.Domain.label(
         class="form-label"
@@ -11,9 +13,10 @@
     {{ form.Domain(
         class="form-control"
     ) }}
+    </div>
     <br/>
-    <center>
 
+    <center>
     {{ form.Submit(
         class="btn btn-secondary"
     ) }}
