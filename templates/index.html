@@ -1,4 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h1>Welcome to Domain information</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.Domain.label(
+        class="form-label"
+    )
+     }}
+    {{ form.Domain(
+        class="form-control"
+    ) }}
+    <br/>
+    <center>
+
+    {{ form.Submit(
+        class="btn btn-secondary"
+    ) }}
+    </center>
+</form>
+
+
 {% endblock %}
