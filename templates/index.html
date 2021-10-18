@@ -4,6 +4,10 @@
 <h1>Welcome to Domain information</h1>
 <form method="POST">
     <div class="form-floating mb-3"></div>
+{% if Domain %}
+    <p>Domain: {{ Domain }}</p>
+
+{% else %}
 
     {{ form.hidden_tag() }}
     {{ form.Domain.label(
@@ -23,5 +27,6 @@
     </center>
 </form>
 
+{% endif %}
 
 {% endblock %}
