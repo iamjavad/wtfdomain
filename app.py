@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import socket
 from flask import Flask
 from flask.templating import render_template
 from flask_wtf import FlaskForm
@@ -18,12 +19,15 @@ app.config['SECRET_KEY'] = 'mysuper secret key'
 @app.route('/', methods=['GET', 'POST'])
 def index():
     Domain = None
+    ip = None
     form = DmainInput()
     if form.validate_on_submit():
         Domain = form.Domain.data
         form.Domain.data = ''
+        ip = socket.gethostbyname(str(Domain))
     return render_template('index.html', 
-    Domain = Domain, 
+    Domain = Domain,
+    ip = ip,
     form=form)
 
 app.debug = True
