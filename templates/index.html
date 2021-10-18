@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Welcome to Domain information</h1>
+<center><h1>Domain information</h1></center>
 <form method="POST">
     <div class="form-floating mb-3"></div>
 {% if Domain %}
-    <p>Domain: {{ Domain }}</p>
+    {% include 'results.html' %}
 
 {% else %}
 
