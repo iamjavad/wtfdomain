@@ -17,8 +17,14 @@ app.config['SECRET_KEY'] = 'mysuper secret key'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    Domain = None
     form = DmainInput()
-    return render_template('index.html', form=form)
+    if form.validate_on_submit():
+        Domain = form.Domain.data
+        form.Domain.data = ''
+    return render_template('index.html', 
+    Domain = Domain, 
+    form=form)
 
 app.debug = True
 app.run()
