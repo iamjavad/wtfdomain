@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import socket
+import whois
 from flask import Flask
 from flask.templating import render_template
 from flask_wtf import FlaskForm
@@ -20,15 +21,20 @@ app.config['SECRET_KEY'] = 'mysuper secret key'
 def index():
     Domain = None
     ip = None
+    emails = None
     form = DmainInput()
     if form.validate_on_submit():
         Domain = form.Domain.data
         form.Domain.data = ''
         ip = socket.gethostbyname(str(Domain))
-    return render_template('index.html', 
+        emails = whois.whois(str(Domain))["emails"]
+        emails = str(emails).replace("[", "").replace("]", "")
+    return render_template('index.html',
     Domain = Domain,
     ip = ip,
-    form=form)
+    form=form,
+    emails = emails
+    )
 
 app.debug = True
 app.run()
