@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from os import name
 import socket
 import whois
 from flask import Flask
@@ -22,6 +23,7 @@ def index():
     Domain = None
     ip = None
     emails = None
+    name_server = None
     form = DmainInput()
     if form.validate_on_submit():
         Domain = form.Domain.data
@@ -29,11 +31,14 @@ def index():
         ip = socket.gethostbyname(str(Domain))
         emails = whois.whois(str(Domain))["emails"]
         emails = str(emails).replace("[", "").replace("]", "")
+        name_server = whois.whois(str(Domain))["name_servers"]
+        name_server = str(name_server).replace("[", "").replace("]", "")
     return render_template('index.html',
     Domain = Domain,
     ip = ip,
     form=form,
-    emails = emails
+    emails = emails,
+    name_server = name_server
     )
 
 app.debug = True
