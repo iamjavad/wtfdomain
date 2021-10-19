@@ -24,21 +24,33 @@ def index():
     ip = None
     emails = None
     name_server = None
+    registrar = None
     form = DmainInput()
     if form.validate_on_submit():
         Domain = form.Domain.data
         form.Domain.data = ''
+        
+        #ip of host
         ip = socket.gethostbyname(str(Domain))
+        
+        #email information
         emails = whois.whois(str(Domain))["emails"]
         emails = str(emails).replace("[", "").replace("]", "")
+        
+        #name servers
         name_server = whois.whois(str(Domain))["name_servers"]
         name_server = str(name_server).replace("[", "").replace("]", "")
+
+        #registrar
+        registrar = whois.whois(str(Domain))["registrar"]
+        registrar = str(registrar).replace("[", "").replace("]", "")
     return render_template('index.html',
     Domain = Domain,
     ip = ip,
     form=form,
     emails = emails,
-    name_server = name_server
+    name_server = name_server,
+    registrar = registrar
     )
 
 app.debug = True
