@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-from os import name
+from datetime import time
 import socket
+from subprocess import TimeoutExpired
 import whois
+import requests
 from flask import Flask
 from flask.templating import render_template
 from flask_wtf import FlaskForm
@@ -25,6 +27,12 @@ def index():
     emails = None
     name_server = None
     registrar = None
+    creation_date =None
+    expiration_date = None
+    country = None
+    city = None
+    timezone = None
+
     form = DmainInput()
     if form.validate_on_submit():
         Domain = form.Domain.data
@@ -44,13 +52,29 @@ def index():
         #registrar
         registrar = whois.whois(str(Domain))["registrar"]
         registrar = str(registrar).replace("[", "").replace("]", "")
+
+        #creation_date
+        creation_date = whois.whois(str(Domain))["creation_date"]
+        creation_date = str(creation_date)
+
+        #ip to Location-"http://ip-api.com/json/{query}"
+        r = requests.get(f"http://ip-api.com/json/{ip}")
+        jsn = r.json()
+        country = jsn["country"]
+        city = jsn["city"]
+        timezone = jsn["timezone"]
+        
     return render_template('index.html',
     Domain = Domain,
     ip = ip,
     form=form,
     emails = emails,
     name_server = name_server,
-    registrar = registrar
+    registrar = registrar,
+    creation_date = creation_date,
+    country = country,
+    city = city,
+    timezone = timezone
     )
 
 app.debug = True
