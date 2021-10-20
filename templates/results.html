@@ -1,7 +1,60 @@
 <html>
     <h3 class="display-6">results for {{ Domain }}</h3>
-    <p>ip address: {{ ip }}</p>
-    <p>emails: {{ emails }}</p>
-    <p>name servers: {{ name_server }}</p>
-    <p>registrar: {{ registrar }}</p>
+
+    <div class="card w-75">
+        <div class="card-body">
+          <h5 class="card-title">IP</h5>
+          <p class="card-text">{{ ip }}</p>
+        </div>
+      </div>
+      
+      <div class="card w-50">
+        <div class="card-body">
+          <h5 class="card-title">emails</h5>
+          <p class="card-text">{{ emails }}</p>
+        </div>
+      </div>
+
+      <div class="card w-75">
+        <div class="card-body">
+          <h5 class="card-title">name servers</h5>
+          <p class="card-text">{{ name_server }}</p>
+        </div>
+      </div>
+      
+      <div class="card w-50">
+        <div class="card-body">
+          <h5 class="card-title">registrar</h5>
+          <p class="card-text">{{ registrar }}</p>
+        </div>
+      </div>
+
+      <div class="card w-75">
+        <div class="card-body">
+          <h5 class="card-title">creation date</h5>
+          <p class="card-text">{{ creation_date }}</p>
+        </div>
+      </div>
+      
+      <div class="card w-50">
+        <div class="card-body">
+          <h5 class="card-title">country</h5>
+          <p class="card-text">{{ country }}</p>
+        </div>
+      </div>
+
+      <div class="card w-75">
+        <div class="card-body">
+          <h5 class="card-title">city</h5>
+          <p class="card-text">{{ city }}</p>
+        </div>
+      </div>
+      
+      <div class="card w-50">
+        <div class="card-body">
+          <h5 class="card-title">time zone</h5>
+          <p class="card-text">{{ timezone }}</p>
+        </div>
+      </div>
+
 </html>
