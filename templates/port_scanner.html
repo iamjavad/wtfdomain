@@ -5,9 +5,23 @@
 <form method="POST">
     <div class="form-floating mb-3"></div>
 {% if Domain %}
-    <center>
-        <p> hi </p>
-    </center>
+    
+    <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+        {% for x in ports[ip_addr]["ports"] %}
+            <th scope="col">{{ x["portid"] }}</th>
+        {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        {% for x in ports[ip_addr]["ports"] %}
+            <td>{{ x["state"] }}</td>
+        {% endfor %}
+          </tr>
+        </tbody>
+      </table>
 
 {% else %}
 
