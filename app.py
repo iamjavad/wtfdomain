@@ -1,19 +1,21 @@
 #!/usr/bin/python3
 
-from datetime import time
-import socket
-from subprocess import TimeoutExpired
+import os
 import whois
+import socket
 import requests
+import nmap3
 from flask import Flask
-from flask.templating import render_template
 from flask_wtf import FlaskForm
+from flask.templating import render_template
 from wtforms.fields.core import StringField
 from wtforms.fields.simple import SubmitField
+from wtforms.form import Form
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 
+#main field
 class DmainInput(FlaskForm):
     Domain = StringField("Enter Domain name:", validators=[DataRequired()])
     Submit = SubmitField("submit")
@@ -93,7 +95,27 @@ def index():
     lon = lon
     )
 
+#port scanner class
+class PortField(FlaskForm):
+    Domain = StringField("Domain:", validators=[DataRequired()])
+    Port = StringField("Port:", validators=[DataRequired()])
+    Submit = SubmitField("start scan")
+
 #PORT SCANNER
+@app.route('/portscanner', methods=['GET', 'POST'])
+def portscanner():
+    Domain = None
+
+    form = PortField()
+    if form.validate_on_submit():
+        Domain = form.Domain.data
+        form.Domain.data = ''
+        #start port scanner
+        os.system(f'nmap {Domain} >> ports')
+    return render_template('port_scanner.html',
+    form = form,
+    Domain = Domain
+    )
 
 app.debug = True
 app.run()
