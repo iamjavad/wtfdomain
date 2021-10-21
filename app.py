@@ -117,6 +117,11 @@ def portscanner():
     Domain = Domain
     )
 
+#Donation
+@app.route('/donation')
+def donation():
+    return render_template('donation.html')
+
 app.debug = True
 app.run()
 app.run(debug = True)
