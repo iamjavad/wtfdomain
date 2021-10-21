@@ -122,6 +122,66 @@ def portscanner():
 def donation():
     return render_template('donation.html')
 
+#API
+@app.route('/API')
+def api():
+    return render_template('api.html')
+
+@app.route('/api/ip/<domain>', methods=['GET', 'POST'])
+def host_ip(domain):
+    ip = socket.gethostbyname(domain)
+    return {"IP": ip}
+@app.route('/api/whois/<Domain>', methods=['GET', 'POST'])
+def host_whois(Domain):
+    #ip of host
+    ip = socket.gethostbyname(str(Domain))
+        
+    #email information
+    emails = whois.whois(str(Domain))["emails"]
+    emails = str(emails).replace("[", "").replace("]", "")
+        
+    #name servers
+    name_server = whois.whois(str(Domain))["name_servers"]
+    name_server = str(name_server).replace("[", "").replace("]", "")
+
+    #registrar
+    registrar = whois.whois(str(Domain))["registrar"]
+    registrar = str(registrar).replace("[", "").replace("]", "")
+
+    #creation_date
+    creation_date = whois.whois(str(Domain))["creation_date"]
+    creation_date = str(creation_date)
+
+    #ip to Location-"http://ip-api.com/json/{query}"
+    r = requests.get(f"http://ip-api.com/json/{ip}")
+    jsn = r.json()
+    country = jsn["country"]
+    city = jsn["city"]
+    timezone = jsn["timezone"]
+
+    #updated_date
+    updated_date = whois.whois(str(Domain))["updated_date"]
+    updated_date = str(updated_date)
+    return {"ip":ip,
+    "emails":emails,
+    "name_server":name_server,
+    "registerer":registrar,
+    "creation_date":creation_date,
+    "country":country,
+    "time zone":timezone}
+
+@app.route('/api/lat_lon/<ip>')
+def lat_lon(ip):
+    r = requests.get(f"http://ip-api.com/json/{ip}")
+    jsn = r.json()
+
+    Latitude = jsn["lat"]
+    Longitude = jsn["lon"]
+    
+    return {"Latitude":Latitude,
+    "Longitude":Longitude}
+
+
 app.debug = True
 app.run()
 app.run(debug = True)
