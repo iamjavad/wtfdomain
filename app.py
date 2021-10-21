@@ -98,23 +98,27 @@ def index():
 #port scanner class
 class PortField(FlaskForm):
     Domain = StringField("Domain:", validators=[DataRequired()])
-    Port = StringField("Port:", validators=[DataRequired()])
     Submit = SubmitField("start scan")
 
 #PORT SCANNER
 @app.route('/portscanner', methods=['GET', 'POST'])
 def portscanner():
     Domain = None
-
+    ports = None
+    ip_addr = None
+    
     form = PortField()
     if form.validate_on_submit():
         Domain = form.Domain.data
         form.Domain.data = ''
         #start port scanner
-        os.system(f'nmap {Domain} >> ports')
+        ports = nmap3.Nmap().scan_top_ports(Domain)
+        ip_addr = socket.gethostbyname(Domain)
     return render_template('port_scanner.html',
     form = form,
-    Domain = Domain
+    Domain = Domain,
+    ports = ports,
+    ip_addr = ip_addr
     )
 
 #Donation
