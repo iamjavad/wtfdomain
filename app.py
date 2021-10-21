@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 #main field
 class DmainInput(FlaskForm):
-    Domain = StringField("Enter Domain name:", validators=[DataRequired()])
+    Domain = StringField("Enter Domain name or IP address:", validators=[DataRequired()])
     Submit = SubmitField("submit")
 
 app.config['SECRET_KEY'] = 'mysuper secret key'
@@ -97,7 +97,7 @@ def index():
 
 #port scanner class
 class PortField(FlaskForm):
-    Domain = StringField("Domain:", validators=[DataRequired()])
+    Domain = StringField("Domain or IP:", validators=[DataRequired()])
     Submit = SubmitField("start scan")
 
 #PORT SCANNER
