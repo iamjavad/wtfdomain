@@ -1,9 +1,35 @@
-<html>
-    open ports for {{ ip }}
+{% extends 'base.html' %}
+{% block content %}
+
+<center><h1>Port scanner</h1></center>
+<form method="POST">
+    <div class="form-floating mb-3"></div>
+{% if Domain %}
+    <center>
+        <p> hi </p>
+    </center>
+
+{% else %}
+
+    {{ form.hidden_tag() }}
+    {{ form.Domain.label(
+        class="form-label"
+    )
+     }}
+    {{ form.Domain(
+        class="form-control"
+    ) }}
+    <br/>
     
+    <br/>
 
+    <center>
+    {{ form.Submit(
+        class="btn btn-secondary"
+    ) }}
+    </center>
+</form>
 
+{% endif %}
 
-
-
-</html>
+{% endblock %}
