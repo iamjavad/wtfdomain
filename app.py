@@ -3,8 +3,8 @@
 import os
 import whois
 import socket
-import requests
 import nmap3
+import requests
 from flask import Flask
 from flask_wtf import FlaskForm
 from flask.templating import render_template
