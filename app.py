@@ -186,10 +186,10 @@ def lat_lon(ip):
     "Longitude":Longitude}
 
 
-#app.debug = True
-#app.run()
-#app.run(debug = True)
+app.debug = True
+app.run()
+app.run(debug = True)
 
 
-#if __name__=='__main__':
-#    app.run()
+if __name__=='__main__':
+    app.run()
