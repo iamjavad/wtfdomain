@@ -185,11 +185,3 @@ def lat_lon(ip):
     return {"Latitude":Latitude,
     "Longitude":Longitude}
 
-
-app.debug = True
-app.run()
-app.run(debug = True)
-
-
-if __name__=='__main__':
-    app.run()
