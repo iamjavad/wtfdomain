@@ -8,9 +8,7 @@ import requests
 from flask import Flask
 from flask_wtf import FlaskForm
 from flask.templating import render_template
-from wtforms.fields.core import StringField
-from wtforms.fields.simple import SubmitField
-from wtforms.form import Form
+from wtforms  import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
